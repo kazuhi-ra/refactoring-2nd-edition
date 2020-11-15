@@ -53,19 +53,16 @@ function statement(invoice = invoiceExample, plays = playsExample) {
   }).format
 
   for (let performance of invoice.performances) {
-    // const play = playFor(performance)
-    let thisAmount = amountFor(performance)
-
     // ボリューム特典のポイントの加算
     volumeCredits += Math.max(performance.audience - 30, 0)
     // comedyのときは、10人につきさらにポイントを加算
     if ('comedy' === playFor(performance).type)
       volumeCredits += Math.floor(performance.audience / 5)
     // 注文の内訳を出力
-    result += `${playFor(performance).name}: ${format(thisAmount / 100)} (${
+    result += `${playFor(performance).name}: ${format(amountFor(performance) / 100)} (${
       performance.audience
     } seats)\n`
-    totalAmount += thisAmount
+    totalAmount += amountFor(performance)
   }
 
   result += `Amount owed is ${format(totalAmount / 100)}\n`
