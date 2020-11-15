@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/kazuhi-ra/refactoring-2nd-edition/issues"
   },
-  "homepage": "https://github.com/kazuhi-ra/refactoring-2nd-edition#readme"
+  "homepage": "https://github.com/kazuhi-ra/refactoring-2nd-edition#readme",
+  "dependencies": {
+    "json-server": "^0.16.2"
+  }
 }
