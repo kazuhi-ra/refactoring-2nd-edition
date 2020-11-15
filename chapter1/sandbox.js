@@ -13,6 +13,29 @@ const playsExample = {
   othello: { name: 'Othello', type: 'tragedy' },
 }
 
+function amountFor(performance, play) {
+  let thisAmount = 0
+
+  switch (play.type) {
+    case 'tragedy':
+      thisAmount = 40000
+      if (performance.audience > 30) {
+        thisAmount += 10000 + 500 * (performance.audience - 30)
+      }
+      break
+    case 'comedy':
+      thisAmount = 30000
+      if (performance.audience > 20) {
+        thisAmount += 10000 + 500 * (performance.audience - 20)
+      }
+      thisAmount += 300 * performance.audience
+      break
+    default:
+      throw new Error(`unknown type: ${play.type}`)
+  }
+
+  return thisAmount
+}
 
 function statement(invoice = invoiceExample, plays = playsExample) {
   let totalAmount = 0
@@ -27,25 +50,7 @@ function statement(invoice = invoiceExample, plays = playsExample) {
 
   for (let performance of invoice.performances) {
     const play = plays[performance.playID]
-    let thisAmount = 0
-
-    switch (play.type) {
-      case 'tragedy':
-        thisAmount = 40000
-        if (performance.audience > 30) {
-          thisAmount += 10000 + 500 * (performance.audience - 30)
-        }
-        break
-      case 'comedy':
-        thisAmount = 30000
-        if (performance.audience > 20) {
-          thisAmount += 10000 + 500 * (performance.audience - 20)
-        }
-        thisAmount += 300 * performance.audience
-        break
-      default:
-        throw new Error(`unknown type: ${play.type}`)
-    }
+    let thisAmount = amountFor(performance, play)
 
     // ボリューム特典のポイントの加算
     volumeCredits += Math.max(performance.audience - 30, 0)
