@@ -22,7 +22,7 @@ function statement(invoice = invoiceExample, plays = playsExample) {
     return plays[aPerformance.playID]
   }
 
-  function amountFor(aPerformance, play) {
+  function amountFor(aPerformance) {
     let result = 0
 
     switch (playFor(aPerformance).type) {
@@ -54,7 +54,7 @@ function statement(invoice = invoiceExample, plays = playsExample) {
 
   for (let performance of invoice.performances) {
     // const play = playFor(performance)
-    let thisAmount = amountFor(performance, playFor(performance))
+    let thisAmount = amountFor(performance)
 
     // ボリューム特典のポイントの加算
     volumeCredits += Math.max(performance.audience - 30, 0)
