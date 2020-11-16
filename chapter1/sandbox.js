@@ -74,11 +74,14 @@ function statement(invoice = invoiceExample, plays = playsExample) {
 
   let totalAmount = 0
   for (let performance of invoice.performances) {
+    totalAmount += amountFor(performance)
+  }
+
+  for (let performance of invoice.performances) {
     // 注文の内訳を出力
     result += `${playFor(performance).name}: ${usd(amountFor(performance))} (${
       performance.audience
     } seats)\n`
-    totalAmount += amountFor(performance)
   }
 
   result += `Amount owed is ${usd(totalAmount)}\n`
