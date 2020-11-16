@@ -62,19 +62,19 @@ function statement(invoice = invoiceExample, plays = playsExample) {
       style: 'currency',
       currency: 'USD',
       minimumFractionDigits: 2,
-    }).format(aNumber)
+    }).format(aNumber / 100)
   }
 
   for (let performance of invoice.performances) {
     volumeCredits += volumeCreditsFor(performance)
     // 注文の内訳を出力
-    result += `${playFor(performance).name}: ${usd(
-      amountFor(performance) / 100
-    )} (${performance.audience} seats)\n`
+    result += `${playFor(performance).name}: ${usd(amountFor(performance))} (${
+      performance.audience
+    } seats)\n`
     totalAmount += amountFor(performance)
   }
 
-  result += `Amount owed is ${usd(totalAmount / 100)}\n`
+  result += `Amount owed is ${usd(totalAmount)}\n`
   result += `You earned ${volumeCredits} credits\n`
   return result
 }
