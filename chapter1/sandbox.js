@@ -16,6 +16,17 @@ const playsExample = {
 function statement(invoice = invoiceExample, plays = playsExample) {
   let result = `Statement for ${invoice.customer}\n`
 
+  for (let performance of invoice.performances) {
+    // 注文の内訳を出力
+    result += `${playFor(performance).name}: ${usd(amountFor(performance))} (${
+      performance.audience
+    } seats)\n`
+  }
+
+  result += `Amount owed is ${usd(totalAmount())}\n`
+  result += `You earned ${totalVolumeCredits()} credits\n`
+  return result
+
   function playFor(aPerformance) {
     return plays[aPerformance.playID]
   }
@@ -80,17 +91,6 @@ function statement(invoice = invoiceExample, plays = playsExample) {
 
     return result
   }
-
-  for (let performance of invoice.performances) {
-    // 注文の内訳を出力
-    result += `${playFor(performance).name}: ${usd(amountFor(performance))} (${
-      performance.audience
-    } seats)\n`
-  }
-
-  result += `Amount owed is ${usd(totalAmount())}\n`
-  result += `You earned ${totalVolumeCredits()} credits\n`
-  return result
 }
 
 console.log(statement())
