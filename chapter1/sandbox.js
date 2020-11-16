@@ -73,12 +73,12 @@ function statement(invoice = invoiceExample, plays = playsExample) {
   }
 
   function appleSauce() {
-    let totalAmount = 0
+    let result = 0
     for (let performance of invoice.performances) {
-      totalAmount += amountFor(performance)
+      result += amountFor(performance)
     }
 
-    return totalAmount
+    return result
   }
 
   for (let performance of invoice.performances) {
