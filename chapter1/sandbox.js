@@ -57,11 +57,13 @@ function statement(invoice = invoiceExample, plays = playsExample) {
     return result
   }
 
-  const format = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-  }).format
+  function format(aNumber) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+    }).format(aNumber)
+  }
 
   for (let performance of invoice.performances) {
     volumeCredits += volumeCreditsFor(performance)
