@@ -64,12 +64,12 @@ function statement(invoice = invoiceExample, plays = playsExample) {
   }
 
   function totalVolumeCredits() {
-    let volumeCredits = 0
+    let result = 0
     for (let performance of invoice.performances) {
-      volumeCredits += volumeCreditsFor(performance)
+      result += volumeCreditsFor(performance)
     }
 
-    return volumeCredits
+    return result
   }
 
   function totalAmount() {
