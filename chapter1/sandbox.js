@@ -15,7 +15,6 @@ const playsExample = {
 
 function statement(invoice = invoiceExample, plays = playsExample) {
   let totalAmount = 0
-  let volumeCredits = 0
   let result = `Statement for ${invoice.customer}\n`
 
   function playFor(aPerformance) {
@@ -72,7 +71,8 @@ function statement(invoice = invoiceExample, plays = playsExample) {
     } seats)\n`
     totalAmount += amountFor(performance)
   }
-
+  
+  let volumeCredits = 0
   for (let performance of invoice.performances) {
     volumeCredits += volumeCreditsFor(performance)
   }
