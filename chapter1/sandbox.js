@@ -46,12 +46,12 @@ function statement(invoice = invoiceExample, plays = playsExample) {
     return result
   }
 
-  function volumeCreditsFor(performance) {
+  function volumeCreditsFor(aPerformance) {
     let volumeCredits = 0
 
-    volumeCredits += Math.max(performance.audience - 30, 0)
-    if ('comedy' === playFor(performance).type) {
-      volumeCredits += Math.floor(performance.audience / 5)
+    volumeCredits += Math.max(aPerformance.audience - 30, 0)
+    if ('comedy' === playFor(aPerformance).type) {
+      volumeCredits += Math.floor(aPerformance.audience / 5)
     }
 
     return volumeCredits
