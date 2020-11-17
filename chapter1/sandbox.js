@@ -71,21 +71,17 @@ function statement(invoice = invoiceExample, plays = playsExample) {
   }
 
   function totalVolumeCredits(data) {
-    let result = 0
-    for (let performance of data.performances) {
-      result += performance.volumeCredits
-    }
-
-    return result
+    return data.performances.reduce(
+      (total, performance) => total + performance.volumeCredits,
+      0
+    )
   }
 
   function totalAmount(data) {
-    let result = 0
-    for (let performance of data.performances) {
-      result += performance.amount
-    }
-
-    return result
+    return data.performances.reduce(
+      (total, performance) => total + performance.amount,
+      0
+    )
   }
 }
 
