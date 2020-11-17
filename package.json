@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "リファクタリング(第2版): 既存のコードを安全に改善する のコードを手元で動かすためのやつです",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
