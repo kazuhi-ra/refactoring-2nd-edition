@@ -17,7 +17,7 @@ function statement(invoice = invoiceExample, plays = playsExample) {
   const statementData = {}
   statementData.customer = invoice.customer
   statementData.performances = invoice.performances.map(enrichPerformance)
-  
+
   return renderPlainText(statementData, plays)
 
   function enrichPerformance(aPerformance) {
@@ -37,7 +37,7 @@ function renderPlainText(data, plays) {
 
   for (let performance of data.performances) {
     // 注文の内訳を出力
-    result += `${playFor(performance).name}: ${usd(amountFor(performance))} (${
+    result += `${performance.play.name}: ${usd(amountFor(performance))} (${
       performance.audience
     } seats)\n`
   }
@@ -46,14 +46,10 @@ function renderPlainText(data, plays) {
   result += `You earned ${totalVolumeCredits()} credits\n`
   return result
 
-  function playFor(aPerformance) {
-    return plays[aPerformance.playID]
-  }
-
   function amountFor(aPerformance) {
     let result = 0
 
-    switch (playFor(aPerformance).type) {
+    switch (aPerformance.play.type) {
       case 'tragedy':
         result = 40000
         if (aPerformance.audience > 30) {
@@ -68,7 +64,7 @@ function renderPlainText(data, plays) {
         result += 300 * aPerformance.audience
         break
       default:
-        throw new Error(`unknown type: ${playFor(aPerformance).type}`)
+        throw new Error(`unknown type: ${aPerformance.play.type}`)
     }
 
     return result
@@ -78,7 +74,7 @@ function renderPlainText(data, plays) {
     let result = 0
 
     result += Math.max(aPerformance.audience - 30, 0)
-    if ('comedy' === playFor(aPerformance).type) {
+    if ('comedy' === aPerformance.play.type) {
       result += Math.floor(aPerformance.audience / 5)
     }
 
