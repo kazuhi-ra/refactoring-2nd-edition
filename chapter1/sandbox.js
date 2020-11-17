@@ -16,8 +16,11 @@ const playsExample = {
 function statement(invoice = invoiceExample, plays = playsExample) {
   const statementData = {}
   statementData.customer = invoice.customer
-  statementData.performances = invoice.performances
-  
+  statementData.performances = invoice.performances.map(performance => {
+    const result = Object.assign({}, performance)
+    return result
+  })
+
   return renderPlainText(statementData, plays)
 }
 
