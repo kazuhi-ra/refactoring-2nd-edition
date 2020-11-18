@@ -25,7 +25,7 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
   }).format
 
   for (let perf of invoice.performances) {
-    const play = plays[perf.playID]
+    const play = playFor(perf)
     let thisAmount = amountFor(perf, play)
 
     volumeCredits += Math.max(perf.audience - 30, 0)
@@ -63,6 +63,10 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
     }
 
     return result
+  }
+
+  function playFor(aPerformance) {
+    return plays[aPerformance.playID]
   }
 }
 
