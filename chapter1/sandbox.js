@@ -72,20 +72,20 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
   }
 
   function totalVolumeCredits() {
-    let volumeCredits = 0 // ボリューム特典のポイント
+    let result = 0 // ボリューム特典のポイント
     for (let perf of invoice.performances) {
-      volumeCredits += volumeCreditsFor(perf)
+      result += volumeCreditsFor(perf)
     }
-    return volumeCredits
+    return result
   }
 
   function totalAmount() {
-    let totalAmount = 0 // 合計金額
+    let result = 0 // 合計金額
     for (let perf of invoice.performances) {
-      totalAmount += amountFor(perf)
+      result += amountFor(perf)
     }
 
-    return totalAmount
+    return result
   }
 }
 
