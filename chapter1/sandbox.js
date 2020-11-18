@@ -25,10 +25,11 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
   }).format
 
   for (let perf of invoice.performances) {
-    let thisAmount = amountFor(perf, playFor(perf))
+    let thisAmount = amountFor(perf)
 
     volumeCredits += Math.max(perf.audience - 30, 0)
-    if (playFor(perf).type === 'comedy') volumeCredits += Math.floor(perf.audience / 5)
+    if (playFor(perf).type === 'comedy')
+      volumeCredits += Math.floor(perf.audience / 5)
 
     result += ` ${playFor(perf).name}: ${format(thisAmount / 100)} (${
       perf.audience
@@ -40,10 +41,10 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
   result += `You earned ${volumeCredits} credits\n`
   return result
 
-  function amountFor(aPerformance, play) {
+  function amountFor(aPerformance) {
     let result = 0
 
-    switch (play.type) {
+    switch (playFor(aPerformance).type) {
       case 'tragedy':
         result = 40000
         if (aPerformance.audience > 30) {
@@ -58,7 +59,7 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
         result += 300 * aPerformance.audience
         break
       default:
-        throw new Error(`unknown type: ${play.type}`)
+        throw new Error(`unknown type: ${playFor(aPerformance).type}`)
     }
 
     return result
