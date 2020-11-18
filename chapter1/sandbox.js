@@ -20,7 +20,9 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
 
   for (let perf of invoice.performances) {
     volumeCredits += volumeCreditsFor(perf)
+  }
 
+  for (let perf of invoice.performances) {
     result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${
       perf.audience
     } seats)\n`
