@@ -22,7 +22,7 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
     } seats)\n`
   }
 
-  result += `Amount owed is  ${usd(appleSauce())}\n`
+  result += `Amount owed is  ${usd(totalAmount())}\n`
   result += `You earned ${totalVolumeCredits()} credits\n`
   return result
 
@@ -79,7 +79,7 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
     return volumeCredits
   }
 
-  function appleSauce() {
+  function totalAmount() {
     let totalAmount = 0 // 合計金額
     for (let perf of invoice.performances) {
       totalAmount += amountFor(perf)
