@@ -25,9 +25,7 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
   }).format
 
   for (let perf of invoice.performances) {
-    volumeCredits += Math.max(perf.audience - 30, 0)
-    if (playFor(perf).type === 'comedy')
-      volumeCredits += Math.floor(perf.audience / 5)
+    volumeCredits += volumeCreditsFor(perf)
 
     result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
       perf.audience
@@ -65,6 +63,15 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
 
   function playFor(aPerformance) {
     return plays[aPerformance.playID]
+  }
+
+  function volumeCreditsFor(perf) {
+    let volumeCredits = 0
+    volumeCredits += Math.max(perf.audience - 30, 0)
+    if (playFor(perf).type === 'comedy')
+      volumeCredits += Math.floor(perf.audience / 5)
+
+    return volumeCredits
   }
 }
 
