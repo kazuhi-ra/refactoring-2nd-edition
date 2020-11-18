@@ -16,11 +16,8 @@ const playsExample = {
 export function statement(invoice = invoiceExample, plays = playsExample) {
   let totalAmount = 0 // 合計金額
   let result = `Statement for ${invoice.customer}\n` //
-  
-  let volumeCredits = 0 // ボリューム特典のポイント
-  for (let perf of invoice.performances) {
-    volumeCredits += volumeCreditsFor(perf)
-  }
+
+  let volumeCredits = totalVolumeCredits()
 
   for (let perf of invoice.performances) {
     result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${
@@ -76,6 +73,14 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
       currency: 'USD',
       minimumFractionDigits: 2,
     }).format(aNumber / 100)
+  }
+
+  function totalVolumeCredits() {
+    let volumeCredits = 0 // ボリューム特典のポイント
+    for (let perf of invoice.performances) {
+      volumeCredits += volumeCreditsFor(perf)
+    }
+    return volumeCredits
   }
 }
 
