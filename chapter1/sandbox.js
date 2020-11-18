@@ -21,13 +21,13 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
   for (let perf of invoice.performances) {
     volumeCredits += volumeCreditsFor(perf)
 
-    result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
+    result += ` ${playFor(perf).name}: ${usd(amountFor(perf) / 100)} (${
       perf.audience
     } seats)\n`
     totalAmount += amountFor(perf)
   }
 
-  result += `Amount owed is  ${format(totalAmount / 100)}\n`
+  result += `Amount owed is  ${usd(totalAmount / 100)}\n`
   result += `You earned ${volumeCredits} credits\n`
   return result
 
@@ -68,7 +68,7 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
     return result
   }
 
-  function format(aNumber) {
+  function usd(aNumber) {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
