@@ -1,5 +1,5 @@
 // データを処理するだけの関数にしたい
-export function createStatementData(invoice = invoiceExample, plays = playsExample) {
+export function createStatementData(invoice, plays) {
   const result = {}
   result.customer = invoice.customer
   result.performances = invoice.performances.map(enrichPerformance)
@@ -47,6 +47,7 @@ export function createStatementData(invoice = invoiceExample, plays = playsExamp
 
   function volumeCreditsFor(aPerformance) {
     let result = 0
+    
     result += Math.max(aPerformance.audience - 30, 0)
     if (aPerformance.play.type === 'comedy')
       result += Math.floor(aPerformance.audience / 5)
