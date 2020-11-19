@@ -25,6 +25,7 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
     const result = Object.assign({}, aPerformance)
     result.play = playFor(result)
     result.amount = amountFor(result)
+    result.volumeCredits = volumeCreditsFor(result)
 
     return result
   }
@@ -56,6 +57,15 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
 
     return result
   }
+
+  function volumeCreditsFor(aPerformance) {
+    let result = 0
+    result += Math.max(aPerformance.audience - 30, 0)
+    if (aPerformance.play.type === 'comedy')
+      result += Math.floor(aPerformance.audience / 5)
+
+    return result
+  }
 }
 
 // 引数dataで渡されたデータを加工するだけの関数にしたい
@@ -72,15 +82,6 @@ function renderPlainText(data) {
   result += `You earned ${totalVolumeCredits()} credits\n`
   return result
 
-  function volumeCreditsFor(aPerformance) {
-    let result = 0
-    result += Math.max(aPerformance.audience - 30, 0)
-    if (aPerformance.play.type === 'comedy')
-      result += Math.floor(aPerformance.audience / 5)
-
-    return result
-  }
-
   function usd(aNumber) {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -92,7 +93,7 @@ function renderPlainText(data) {
   function totalVolumeCredits() {
     let result = 0 // ボリューム特典のポイント
     for (let perf of data.performances) {
-      result += volumeCreditsFor(perf)
+      result += perf.volumeCredits
     }
     return result
   }
