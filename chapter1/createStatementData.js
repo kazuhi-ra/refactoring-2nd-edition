@@ -1,3 +1,4 @@
+// データを処理するだけの関数にしたい
 export function createStatementData(invoice, plays) {
   const result = {}
   result.customer = invoice.customer
@@ -27,7 +28,7 @@ export function createStatementData(invoice, plays) {
       case 'tragedy':
         result = 40000
         if (aPerformance.audience > 30) {
-          result += 10000 + 500 * (aPerformance.audience - 30)
+          result += 1000 * (aPerformance.audience - 30)
         }
         break
       case 'comedy':
@@ -46,26 +47,19 @@ export function createStatementData(invoice, plays) {
 
   function volumeCreditsFor(aPerformance) {
     let result = 0
-
+    
     result += Math.max(aPerformance.audience - 30, 0)
-    if ('comedy' === aPerformance.play.type) {
+    if (aPerformance.play.type === 'comedy')
       result += Math.floor(aPerformance.audience / 5)
-    }
 
     return result
   }
 
   function totalVolumeCredits(data) {
-    return data.performances.reduce(
-      (total, performance) => total + performance.volumeCredits,
-      0
-    )
+    return data.performances.reduce((total, p) => total + p.volumeCredits, 0)
   }
 
   function totalAmount(data) {
-    return data.performances.reduce(
-      (total, performance) => total + performance.amount,
-      0
-    )
+    return data.performances.reduce((total, p) => total + p.amount, 0)
   }
 }
