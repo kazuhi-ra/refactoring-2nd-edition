@@ -13,13 +13,17 @@ const playsExample = {
   othello: { name: 'Othello', type: 'tragedy' },
 }
 
+// データを処理するだけの関数にしたい
 export function statement(invoice = invoiceExample, plays = playsExample) {
   const statementData = {}
+  statementData.customer = invoice.customer
+
   return renderPlainText(statementData, invoice, plays)
 }
 
+// 引数dataで渡されたデータを加工するだけの関数にしたい
 function renderPlainText(data, invoice, plays) {
-  let result = `Statement for ${invoice.customer}\n` //
+  let result = `Statement for ${data.customer}\n` //
 
   for (let perf of invoice.performances) {
     result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${
