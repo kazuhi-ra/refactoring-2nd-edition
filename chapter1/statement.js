@@ -1,22 +1,5 @@
-const invoiceExample = {
-  customer: 'BigCo',
-  performances: [
-    { playID: 'hamlet', audience: 55 },
-    { playID: 'as-like', audience: 35 },
-    { playID: 'othello', audience: 40 },
-  ],
-}
-
-const playsExample = {
-  hamlet: { name: 'Hamlet', type: 'tragedy' },
-  'as-like': { name: 'As You Like It', type: 'comedy' },
-  othello: { name: 'Othello', type: 'tragedy' },
-}
-
-
-
 // 引数dataで渡されたデータを加工するだけの関数にしたい
-function renderPlainText(data) {
+export function renderPlainText(data) {
   let result = `Statement for ${data.customer}\n` //
 
   for (let perf of data.performances) {
@@ -37,5 +20,3 @@ function renderPlainText(data) {
     }).format(aNumber / 100)
   }
 }
-
-console.log(statement())
