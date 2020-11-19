@@ -18,6 +18,8 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
   const statementData = {}
   statementData.customer = invoice.customer
   statementData.performances = invoice.performances.map(enrichPerformance)
+  statementData.totalVolumeCredits = totalVolumeCredits(statementData)
+  statementData.totalAmount = totalAmount(statementData)
 
   return renderPlainText(statementData)
 
@@ -66,6 +68,23 @@ export function statement(invoice = invoiceExample, plays = playsExample) {
 
     return result
   }
+
+  function totalVolumeCredits(data) {
+    let result = 0 // ボリューム特典のポイント
+    for (let perf of data.performances) {
+      result += perf.volumeCredits
+    }
+    return result
+  }
+
+  function totalAmount(data) {
+    let result = 0 // 合計金額
+    for (let perf of data.performances) {
+      result += perf.amount
+    }
+
+    return result
+  }
 }
 
 // 引数dataで渡されたデータを加工するだけの関数にしたい
@@ -78,8 +97,8 @@ function renderPlainText(data) {
     } seats)\n`
   }
 
-  result += `Amount owed is  ${usd(totalAmount())}\n`
-  result += `You earned ${totalVolumeCredits()} credits\n`
+  result += `Amount owed is  ${usd(data.totalAmount)}\n`
+  result += `You earned ${data.totalVolumeCredits} credits\n`
   return result
 
   function usd(aNumber) {
@@ -88,23 +107,6 @@ function renderPlainText(data) {
       currency: 'USD',
       minimumFractionDigits: 2,
     }).format(aNumber / 100)
-  }
-
-  function totalVolumeCredits() {
-    let result = 0 // ボリューム特典のポイント
-    for (let perf of data.performances) {
-      result += perf.volumeCredits
-    }
-    return result
-  }
-
-  function totalAmount() {
-    let result = 0 // 合計金額
-    for (let perf of data.performances) {
-      result += perf.amount
-    }
-
-    return result
   }
 }
 
