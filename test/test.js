@@ -1,7 +1,7 @@
 import assert from 'assert'
 
 import { createStatementData } from '../chapter1/createStatementData.js'
-import { renderPlainText } from '../chapter1/statement.js'
+import { renderPlainText } from '../chapter1/renderPlainText.js'
 import { renderHtml } from '../chapter1/renderHtml.js'
 
 const invoiceExample = {
