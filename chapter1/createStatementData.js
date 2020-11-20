@@ -1,3 +1,4 @@
+import { PerformanceCalculator } from './PerformanceCalculator.js'
 // データを処理するだけの関数にしたい
 export function createStatementData(invoice, plays) {
   const result = {}
@@ -9,6 +10,7 @@ export function createStatementData(invoice, plays) {
   return result
 
   function enrichPerformance(aPerformance) {
+    const calculator = new PerformanceCalculator(aPerformance)
     const result = Object.assign({}, aPerformance)
     result.play = playFor(result)
     result.amount = amountFor(result)
