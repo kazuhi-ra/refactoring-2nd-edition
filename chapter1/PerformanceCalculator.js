@@ -5,18 +5,7 @@ export class PerformanceCalculator {
   }
 
   get amount() {
-    let result = 0
-
-    switch (this.play.type) {
-      case 'tragedy':
-        throw '想定外の呼び出し'
-      case 'comedy':
-        throw '想定外の呼び出し'
-      default:
-        throw new Error(`unknown type: ${this.play.type}`)
-    }
-
-    return result
+    throw new Error('サブクラスの責務です') // R.I.P.
   }
 
   get volumeCredits() {
